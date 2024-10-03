@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "101955a5-7eff-45e4-a960-280e7e8ba46a",
+		"name": "WJC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3644595"
+	},
+	"item": [
+		{
+			"name": "Evaluate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"x_capacity\": 2,\n    \"y_capacity\": 10,\n    \"z_amount_wanted\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://wjc.test/api/v1/wjc/evaluate",
+					"protocol": "http",
+					"host": [
+						"wjc",
+						"test"
+					],
+					"path": [
+						"api",
+						"v1",
+						"wjc",
+						"evaluate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
