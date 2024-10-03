@@ -36,7 +36,7 @@ class WJCService
 
     public function evaluate(int $x, int $y, int $z): JsonResponse {
         if (!$this->hasSolution($x, $y, $z)) {
-            return $this->buildResponse(false, 'No Solution', [], 404);
+            return $this->buildResponse(false, 'No Solution', [], 200);
         }
 
         if ($cached = Cache::get($x . ";". $y . ";" . $z)) {
@@ -104,6 +104,6 @@ class WJCService
             }
         }
 
-        return $this->buildResponse(false, 'Wrong evaluation', ['solution not found'], 404);
+        return $this->buildResponse(false, 'Wrong evaluation', ['solution not found'], 200);
     }
 }
