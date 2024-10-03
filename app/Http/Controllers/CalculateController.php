@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\WJCService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CalculateController extends Controller
 {
@@ -12,7 +13,11 @@ class CalculateController extends Controller
      */
     public function evaluate(Request $request, WJCService $wjcService)
     {
-        // TODO: VALIDATE INPUT
+        $request->validate([
+            'x_capacity' => 'required|int|min:1',
+            'y_capacity' => 'required|int|min:1',
+            'z_amount_wanted' => 'required|int|min:1',
+        ]);
         return $wjcService->evaluate(
             $request->x_capacity,
             $request->y_capacity,
