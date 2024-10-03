@@ -4,6 +4,7 @@ namespace App\Services;
 
 use http\Client\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class WJCService
 {
@@ -38,6 +39,12 @@ class WJCService
             return $this->buildResponse(false, 'No Solution', [], 404);
         }
 
+        if ($cached = Cache::get($x . ";". $y . ";" . $z)) {
+            return response()->json([
+                'solution' => $cached
+            ], 200);
+        }
+
         // BTS Algorithm adaptation
         $visited = [];
         $queue = [[0, 0]];
@@ -68,6 +75,7 @@ class WJCService
                         'action' => $step[2],
                     ];
                 }
+                Cache::forever($x . ";". $y . ";" . $z, $response);
                 return response()->json([
                     'solution' => $response
                 ], 200);
