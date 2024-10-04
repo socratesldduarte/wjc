@@ -42,5 +42,44 @@ You can  import this collection to your postman client and do requests to the ev
 ```
 The above request will generate the response:
 ```
-
+{
+    "solution": [
+        {
+            "step": 1,
+            "bucketX": 2,
+            "bucketY": 0,
+            "action": "Fill bucket X"
+        },
+        {
+            "step": 2,
+            "bucketX": 0,
+            "bucketY": 2,
+            "action": "Transfer from bucket X to bucket Y"
+        },
+        {
+            "step": 3,
+            "bucketX": 2,
+            "bucketY": 2,
+            "action": "Fill bucket X"
+        },
+        {
+            "step": 4,
+            "bucketX": 0,
+            "bucketY": 4,
+            "action": "Transfer from bucket X to bucket Y",
+            "status": "solved"
+        }
+    ]
+}
 ```
+
+The response will be stored in the Redis server - and a new request with the same payload will be returned faster than the first one.
+For example, a request:
+```
+{
+    "x_capacity":  1,
+    "y_capacity": 10000,
+    "z_amount_wanted": 5005
+}
+```
+was processed (first time) in 13.47s (9,990 steps). After caching it, a new request was returned in 55 ms.
