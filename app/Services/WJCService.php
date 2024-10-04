@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 
 class WJCService
 {
-    protected function gcd(int $x, int $y): int {
+    public function gcd(int $x, int $y): int {
         while ($y != 0) {
             $temp = $y;
             $y = $x % $y;
@@ -17,7 +17,7 @@ class WJCService
         return $x;
     }
 
-    protected function hasSolution($x, $y, $z): bool {
+    public function hasSolution($x, $y, $z): bool {
         return (($z % $this->gcd($x, $y)) == 0);
     }
 
@@ -74,6 +74,9 @@ class WJCService
                         'bucketY' => $step[1],
                         'action' => $step[2],
                     ];
+                }
+                if ($count > 0) {
+                    $response[$count - 1]['status'] = 'solved';
                 }
                 Cache::forever($x . ";". $y . ";" . $z, $response);
                 return response()->json([
